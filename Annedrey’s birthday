@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Annedrey</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: "Segoe UI", sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    background:linear-gradient(135deg,#fff6f8,#ffe8f0,#fff7f0);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:800px;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(15px);
+    border-radius:30px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,.12);
+    position:relative;
+    z-index:2;
+}
+
+h1{
+    color:#d63384;
+    margin-bottom:10px;
+    font-size:2rem;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:25px;
+}
+
+#bouquet{
+    margin:25px auto;
+    cursor:pointer;
+    user-select:none;
+}
+
+.flower{
+    display:inline-block;
+    font-size:0;
+    opacity:0;
+    transform:scale(0);
+    transition:all .5s ease;
+    margin:4px;
+}
+
+.bloom{
+    opacity:1;
+    transform:scale(1.2);
+    font-size:50px;
+}
+
+#tapText{
+    color:#d63384;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#messageContainer{
+    display:none;
+    margin-top:25px;
+}
+
+#typewriter{
+    text-align:left;
+    white-space:pre-wrap;
+    line-height:1.8;
+    color:#444;
+    font-size:1rem;
+}
+
+.cursor{
+    border-right:2px solid #d63384;
+    animation:blink .8s infinite;
+}
+
+@keyframes blink{
+    50%{border-color:transparent;}
+}
+
+.float{
+    position:fixed;
+    pointer-events:none;
+    animation:fall linear infinite;
+    z-index:1;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-10vh);
+    }
+    to{
+        transform:translateY(110vh);
+    }
+}
+
+.footer{
+    margin-top:20px;
+    color:#999;
+    font-size:.9rem;
+}
+
+@media(max-width:600px){
+    .bloom{
+        font-size:38px;
+    }
+
+    h1{
+        font-size:1.7rem;
+    }
+
+    .card{
+        padding:22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>🌷 Happy Birthday, Annedrey! 🌷</h1>
+    <p class="subtitle">A little surprise is waiting for you ✨</p>
+
+    <p id="tapText">Tap the bouquet to make it bloom 💖</p>
+
+    <div id="bouquet">
+        <span class="flower">🌷</span>
+        <span class="flower">🌹</span>
+        <span class="flower">💖</span>
+        <span class="flower">🌷</span>
+        <span class="flower">🌹</span>
+        <span class="flower">✨</span>
+        <span class="flower">🌸</span>
+        <span class="flower">🌷</span>
+        <span class="flower">💖</span>
+    </div>
+
+    <div id="messageContainer">
+        <div id="typewriter" class="cursor"></div>
+    </div>
+
+    <div class="footer">
+        Made with flowers, wishes, and a little courage 🌷
+    </div>
+
+</div>
+
+<script>
+
+const message = `Dear Annedrey,
+
+Happy Birthday! 🎂
+
+Today is all about celebrating someone special.
+
+May your day be filled with laughter, beautiful memories, and everything that makes you smile.
+
+🌷 May your dreams bloom beautifully.
+
+🌹 May happiness always find its way to you.
+
+💖 May you always know how appreciated you are.
+
+✨ May this year bring exciting adventures, wonderful opportunities, and moments worth remembering.
+
+Thank you for being someone worth celebrating.
+
+And if these flowers could speak, I think they'd all agree that today belongs to you.
+
+Enjoy your special day, Annedrey.
+
+— From someone who wishes you the happiest birthday 🌷`;
+
+let started = false;
+
+document.getElementById("bouquet").addEventListener("click", () => {
+
+    if(started) return;
+    started = true;
+
+    const flowers = document.querySelectorAll(".flower");
+
+    flowers.forEach((flower,index)=>{
+        setTimeout(()=>{
+            flower.classList.add("bloom");
+        }, index * 220);
+    });
+
+    setTimeout(()=>{
+        document.getElementById("tapText").style.display="none";
+        document.getElementById("messageContainer").style.display="block";
+        startTyping();
+    },2500);
+});
+
+function startTyping(){
+
+    let i = 0;
+    const target = document.getElementById("typewriter");
+
+    function type(){
+
+        if(i < message.length){
+            target.textContent += message.charAt(i);
+            i++;
+            setTimeout(type, 32);
+        }else{
+            target.classList.remove("cursor");
+        }
+    }
+
+    type();
+}
+
+const icons = ["🌷","🌹","💖","✨","🌸"];
+
+for(let i=0;i<70;i++){
+
+    const item = document.createElement("div");
+
+    item.className = "float";
+    item.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+
+    item.style.left = Math.random()*100 + "vw";
+    item.style.fontSize = (18 + Math.random()*22) + "px";
+    item.style.animationDuration = (7 + Math.random()*8) + "s";
+    item.style.animationDelay = Math.random()*10 + "s";
+
+    document.body.appendChild(item);
+}
+</script>
+
+</body>
+</html>
