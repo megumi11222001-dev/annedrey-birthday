@@ -1,0 +1,13 @@
+<div id="messageContainer">
+    <div id="typewriter" class="cursor"></div>
+</div>
+
+<script>
+const message = `🌹 Hi, My love of my life! 🌹
+
+I hope mag stay loyal kas ako,
+I hope dili ko nimo itreat ug lain,
+And I hope nga pahalagahan ko nimo. 💖
+
+Yours truly, siopao`;
+</script>
